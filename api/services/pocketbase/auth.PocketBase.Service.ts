@@ -1,5 +1,5 @@
 import { BasePocketBaseService } from './base.PocketBase.service';
-import { LoginAdminRequest, LoginClientRequest, RefreshTokenRequest } from './requests/auth.PocketBase';
+import { LoginAdminRequest, LoginClientRequest, RefreshTokenRequest } from './requests/auth.Request.PocketBase';
 import { AuthPocketBase, AuthPocketBaseAdminRecord, AuthPocketBaseRecord, AuthProviderInfo } from './responses/auth.Response.PocketBase';
 import { PocketBaseErrorResponse } from './responses/errorResponse.PocketBase';
 import { AppEnvironment } from '../../common/constants/environment';
