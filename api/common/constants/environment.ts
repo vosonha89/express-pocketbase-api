@@ -9,6 +9,8 @@ class Environment {
     public readonly VERSION = process.env.PORT ? process.env.VERSION : '';
     public readonly POCKETPAGE_URL = process.env.POCKETPAGE_URL ? process.env.POCKETPAGE_URL : '';
     public readonly APPKEY = process.env.APPKEY ? process.env.APPKEY : '';
+    public readonly FILE_LIMIT = process.env.FILE_LIMIT ? process.env.FILE_LIMIT : '5mb';
+    public readonly FILE = process.env.APPKEY ? process.env.APPKEY : '';
     public readonly TOKENEXP = process.env.TOKENEXP ? process.env.TOKENEXP : 1728000;
     public readonly ADMIN_TOKEN = process.env.ADMIN_TOKEN ? process.env.ADMIN_TOKEN : '';
     public readonly API_HOSTNAME = process.env.API_HOSTNAME ? process.env.API_HOSTNAME : '';

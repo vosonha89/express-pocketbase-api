@@ -6,6 +6,7 @@ import { PocketBaseItem, PocketBaseSearchResponse } from './responses/baseRespon
 import { ConstantValue } from '../../common/constants/constant';
 import { PocketBaseErrorResponse } from './responses/errorResponse.PocketBase';
 import { ObjectHelper } from '../../common/functions/objectHelper';
+import { AnyType } from 'typescript-express-basic';
 
 export abstract class BasePocketBaseService {
     /**
@@ -28,6 +29,31 @@ export abstract class BasePocketBaseService {
      * PocketBase
      */
     public pocketBase = this.pocketBaseApi.client;
+
+    /**
+     * Get public file url
+     * @param record 
+     * @param fileName 
+     * @returns 
+     */
+    public async getPublicFileUrl(record: { [key: string]: AnyType; }, fileName: string): Promise<string> {
+        const me = this;
+        const fileUrl = me.pocketBase.files.getURL(record, fileName);
+        return fileUrl;
+    }
+
+    /**
+     * Get private file url
+     * @param record 
+     * @param fileName 
+     * @returns 
+     */
+    public async getPrivateFileUrl(record: { [key: string]: AnyType; }, fileName: string): Promise<string> {
+        const me = this;
+        const fileToken = await me.pocketBase.files.getToken();
+        const fileUrl = me.pocketBase.files.getURL(record, fileName, { 'token': fileToken });
+        return fileUrl;
+    }
 }
 
 /**

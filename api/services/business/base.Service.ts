@@ -66,28 +66,9 @@ export abstract class BaseService
     public async search(request: TSearchRequest): Promise<TSearchResponse | ErrorResponse> {
         const me = this;
         try {
-            // Create filter
-            const filterContent: string[] = [];
-            for (const element of request.filters) {
-                filterContent.push(element.fieldName + element.filterCondition + "'" + element.fieldValue + "'");
-            }
-            let filter = '';
-            if (filterContent && filterContent.length > 0) {
-                filter = "(" + filterContent.join(' && ') + ")";
-            }
-            // Create sort
-            let sortContent = '';
-            if (request.sort.sortType == 'DESC') {
-                sortContent += '-';
-            }
-            sortContent += request.sort.sortField;
-            const sort = sortContent;
             // Create pocketbase request
             const pocketBaseRequest = me.getSearchEntity();
-            pocketBaseRequest.page = request.page;
-            pocketBaseRequest.perPage = request.size;
-            pocketBaseRequest.filter = filter;
-            pocketBaseRequest.sort = sort;
+            pocketBaseRequest.applyQuery(request);
             setUserInfo(pocketBaseRequest, request.currentUser);
             const pocketBaseResponse = await me.logicPocketBaseService.search(pocketBaseRequest);
             const data = {} as BaseSearchResponse<TEntity>;

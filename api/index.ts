@@ -11,10 +11,19 @@ import { AuthFilterService } from './common/services/authFilter.Service';
 import { AuthController as AdminAuthController } from './controllers/admin/auth/auth.Controller';
 import { AuthController as ClientAuthController } from './controllers/client/auth/auth.Controller';
 
+/**
+ * Application
+ */
 console.log(AppEnvironment.ENV);
+console.log(process.env.KEY);
+console.log(AppEnvironment.APPKEY);
+if (process.env.KEY?.trim() != AppEnvironment.APPKEY.trim()) {
+    throw Error('Cannot start app');
+}
 const port = AppEnvironment.PORT;
 const app = apiExpress;
-app.use(express.json());
+app.use(express.json({ limit: AppEnvironment.FILE_LIMIT }));
+app.use(express.urlencoded({ limit: AppEnvironment.FILE_LIMIT }));
 app.use(cors());
 
 // Authentication middleware

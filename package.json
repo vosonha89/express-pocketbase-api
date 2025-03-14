@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "express-pocketbase-api",
   "main": "index.js",
-  "scripts": {
+"scripts": {
     "start": "npm run lint && npm run dev",
     "build": "npm run lint && npm run clean && npx tsc",
-    "dev": "nodemon api/index.ts",
+    "dev": "SET KEY=bcc4c998d9e44492b7d75ffbec80632d && nodemon api/index.ts",
     "lint": "eslint",
     "clean": "rimraf build/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:dev": "docker build --build-arg ENV=development -t welearningvn/063a8c46-d7e2-48d7-b8bb-d922257d5546-ekpapi-dev ."
   },
   "author": "vosonha89@gmail.com",
   "license": "MIT",
